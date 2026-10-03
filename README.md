@@ -80,7 +80,7 @@ src/
 │   ├── FinalizarCompra.jsx
 │   ├── Inicio.jsx
 │   ├── Nosotros.jsx
-│   ├── Productos.jsx
+│   └── Productos.jsx
 ├── data/
 │   └── productos.js   Catálogo de productos
 ├── App.jsx            Estado compartido (carrito, tema, avisos) y rutas
