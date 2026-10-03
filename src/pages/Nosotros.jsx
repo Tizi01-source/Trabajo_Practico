@@ -57,6 +57,9 @@ function Nosotros() {
                                 <h3 className="h5"><i className="bi bi-bullseye text-primary me-2"></i>Nuestra misión</h3>
                                 <p className="mb-0">
                                     Que comprar tu próximo juego o equipo sea tan simple como jugarlo.
+                                    <br></br>
+                                    Buscamos que la experiencia de compra sea rápida, clara y confiable, para que puedas
+                                    dedicar más tiempo a lo que realmente importa: jugar.
                                 </p>
                             </div>
                         </div>
