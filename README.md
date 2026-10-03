@@ -4,7 +4,7 @@ Aplicación web en React que simula una tienda online de videojuegos, consolas, 
 
 Trabajo práctico de la materia **Construcción de Interfaces de Usuario** (Licenciatura en Informática, UNAHUR).
 
-🔗 **Deploy:** _(link de Vercel)_
+🔗 **Deploy:** _https://trabajo-practico-ten.vercel.app/_
 
 ## Capturas
 
