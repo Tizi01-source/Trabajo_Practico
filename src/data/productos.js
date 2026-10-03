@@ -1,3 +1,8 @@
+// Catálogo de la tienda. Todos los productos tienen los mismos campos que el primero.
+// Campos opcionales, solo en algunos productos:
+//   - precioAnterior: precio antes de la oferta (se muestra tachado).
+//   - etiqueta: texto destacado en la card ("Oferta", "Más vendido", "Nuevo").
+
 export const productos = [
     {
         id: 1, // Id para identificar el producto. Tipo number.

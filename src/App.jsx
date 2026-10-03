@@ -5,43 +5,63 @@ import { useState, useEffect } from 'react'
 // Importaciones de páginas.
 import Inicio from './pages/Inicio'
 import Productos from './pages/Productos'
-import Carrito from './pages/Carrito'
-import Contacto from './pages/Contacto'
-import FinalizarCompra from './pages/FinalizarCompra.jsx'
 import DetalleProducto from './pages/DetalleProducto'
+import Carrito from './pages/Carrito'
+import FinalizarCompra from './pages/FinalizarCompra.jsx'
 import Nosotros from './pages/Nosotros'
+import Contacto from './pages/Contacto'
 
 // Importaciones de componentes.
 import Navbar from './components/Navbar'
-import Footer from "./components/Footer.jsx"
+import Footer from './components/Footer.jsx'
 import ScrollToTop from './components/ScrollToTop'
 import Aviso from './components/Aviso'
 
-// Componente principal de la aplicación.
+// Componente raíz de la aplicación. Contiene el estado global y las rutas.
 function App() {
 
-    // Estado del carrito, avisos y tema.
+    // ESTADOS
+
+    // Carrito de compras, recordado entre visitas. Se inicializa desde localStorage si hay datos guardados.
     const [carrito, setCarrito] = useState(() => {
-        const guardado = localStorage.getItem('carrito')
-        return guardado ? JSON.parse(guardado) : []
+        try {
+            const guardado = localStorage.getItem('carrito')
+            return guardado ? JSON.parse(guardado) : []
+        } catch {
+            return []
+        }
     })
-    const [avisos, setAvisos] = useState([])
-    const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0)
-    const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0)
+
+    // Tema de la aplicación (claro u oscuro), recordado entre visitas. Se inicializa desde localStorage si hay datos guardados.
     const [tema, setTema] = useState(() => {
         return localStorage.getItem('tema') || 'light'
     })
 
-    // Efectos para sincronizar el carrito y el tema con el almacenamiento local y el atributo de tema del documento.
+    // Avisos que se muestran en pantalla cuando se agregan productos al carrito o se intenta agregar más de lo que hay en stock.
+    const [avisos, setAvisos] = useState([])
+
+    // VALORES CALCULADOS
+
+    // Cantidad total de productos en el carrito y total a pagar, calculados a partir del estado carrito.
+    const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0)
+    const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0)
+
+    // EFECTOS
+
+    // Guarda el carrito en localStorage cada vez que cambia, para que se recuerde entre visitas.
     useEffect(() => {
         localStorage.setItem('carrito', JSON.stringify(carrito))
     }, [carrito])
+
+    // Aplica el tema actual al documento y lo guarda en localStorage cada vez que cambia, para que se recuerde entre visitas.
     useEffect(() => {
         document.documentElement.setAttribute('data-bs-theme', tema)
         localStorage.setItem('tema', tema)
     }, [tema])
 
-    // Función para mostrar avisos temporales.
+    // FUNCIONES
+
+    // Muestra un aviso en pantalla durante 2.5 segundos. Se limita a 3 avisos simultáneos.
     function mostrarAviso(texto, tipo) {
         const id = Date.now() + Math.random()
         setAvisos(prev => [...prev, { id, texto, tipo }].slice(-3))
@@ -50,7 +70,7 @@ function App() {
         }, 2500)
     }
 
-    // Funciones para manejar el carrito de compras.
+    // Agrega un producto al carrito. Si ya está, aumenta la cantidad hasta el stock disponible.
     function agregarAlCarrito(producto) {
         const existente = carrito.find(item => item.id === producto.id)
 
@@ -66,6 +86,8 @@ function App() {
 
         mostrarAviso(`${producto.nombre} se agregó al carrito`, 'primary')
     }
+
+    // Aumenta la cantidad de un item, sin pasar del stock disponible.
     function aumentarCantidad(id) {
         setCarrito(carrito.map(item =>
             item.id === id && item.cantidad < item.stock
@@ -73,6 +95,8 @@ function App() {
                 : item
         ))
     }
+
+    // Disminuye la cantidad de un item, sin pasar de 1.
     function disminuirCantidad(id) {
         setCarrito(carrito.map(item =>
             item.id === id && item.cantidad > 1
@@ -80,53 +104,73 @@ function App() {
                 : item
         ))
     }
+
+    // Elimina un item del carrito.
     function eliminarDelCarrito(id) {
         setCarrito(carrito.filter(item => item.id !== id))
     }
+
+    // Vacía el carrito, dejándolo como un array vacío.
     function vaciarCarrito() {
         setCarrito([])
     }
 
-    // Función para alternar entre el tema claro y oscuro.
+    // Alterna el tema entre claro y oscuro.
     function alternarTema() {
         setTema(tema === 'light' ? 'dark' : 'light')
     }
 
-    // Renderizado del componente principal de la aplicación.
     return (
+
         <div className="d-flex flex-column min-vh-100">
 
-            {/* Renderizado del componente de desplazamiento al inicio. */}
+            {/* ScrollToTop se encarga de llevar el scroll a la parte superior al cambiar de página. */}
             <ScrollToTop />
-            {/* Renderizado del componente de barra de navegación. */}
+
+            {/* Navbar muestra el menú de navegación en todas las páginas. */}
             <Navbar cantidadTotal={cantidadTotal} tema={tema} alternarTema={alternarTema} />
 
-            {/* Renderizado del componente principal. */}
             <main className="flex-grow-1">
 
-                {/* Renderizado de las rutas de la aplicación. */}
+                {/* Rutas de la aplicación */}
                 <Routes>
                     <Route path="/" element={<Inicio agregarAlCarrito={agregarAlCarrito} />} />
-
                     <Route path="/productos" element={<Productos agregarAlCarrito={agregarAlCarrito} />} />
+
                     <Route path="/producto/:id" element={<DetalleProducto agregarAlCarrito={agregarAlCarrito} />} />
                     <Route path="/nosotros" element={<Nosotros />} />
                     <Route path="/contacto" element={<Contacto />} />
 
-
-                    <Route path="/carrito" element={<Carrito carrito={carrito} aumentarCantidad={aumentarCantidad} disminuirCantidad={disminuirCantidad} eliminarDelCarrito={eliminarDelCarrito} total={total} cantidadTotal={cantidadTotal} />} />
-                    <Route path="/finalizar-compra" element={<FinalizarCompra carrito={carrito} total={total} vaciarCarrito={vaciarCarrito} cantidadTotal={cantidadTotal} />} />
+                    <Route path="/carrito" element={
+                        <Carrito
+                            carrito={carrito}
+                            aumentarCantidad={aumentarCantidad}
+                            disminuirCantidad={disminuirCantidad}
+                            eliminarDelCarrito={eliminarDelCarrito}
+                            total={total}
+                            cantidadTotal={cantidadTotal}
+                        />
+                    } />
+                    <Route path="/finalizar-compra" element={
+                        <FinalizarCompra
+                            carrito={carrito}
+                            total={total}
+                            vaciarCarrito={vaciarCarrito}
+                            cantidadTotal={cantidadTotal}
+                        />
+                    } />
                 </Routes>
+
             </main>
 
-            {/* Renderizado del componente de pie de página. */}
+            {/* Footer se muestra en todas las páginas. */}
             <Footer />
-            {/* Renderizado del componente de avisos. */}
+
+            {/* Aviso muestra mensajes temporales en pantalla. */}
             <Aviso avisos={avisos} />
 
         </div>
     )
 }
 
-// Exportación del componente principal de la aplicación.
 export default App

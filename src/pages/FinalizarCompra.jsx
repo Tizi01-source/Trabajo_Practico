@@ -11,6 +11,9 @@ function FinalizarCompra({ carrito, total, vaciarCarrito, cantidadTotal }) {
     const [errores, setErrores] = useState({})
     const [confirmado, setConfirmado] = useState(false)
 
+    // Copia del pedido confirmado. Se guarda antes de vaciar el carrito para poder mostrar el resumen.
+    const [pedido, setPedido] = useState(null)
+
     // Función para manejar cambios en los campos del formulario.
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -56,24 +59,65 @@ function FinalizarCompra({ carrito, total, vaciarCarrito, cantidadTotal }) {
         // Actualiza el estado de errores con los nuevos errores encontrados.
         setErrores(nuevosErrores)
 
-        // Si no hay errores, se confirma la compra y se vacía el carrito.
+        // Si no hay errores, se guarda una copia del pedido, se confirma la compra y se vacía el carrito.
         if (Object.keys(nuevosErrores).length === 0) {
+            setPedido({ items: carrito, total, cantidadTotal })
             setConfirmado(true)
             vaciarCarrito()
         }
     }
 
-    // Si la compra fue confirmada, se muestra un mensaje de éxito y un botón para volver al catálogo.
+    // Si la compra fue confirmada, se muestra el resumen del pedido y un botón para volver al catálogo.
     if (confirmado) {
         return (
-            <div className="container my-4">
+            <div className="container my-5">
+                <div className="row justify-content-center">
+                    <div className="col-lg-7">
 
-                <div className="alert alert-success" role="alert">
-                    <h4 className="alert-heading">Compra confirmada</h4>
-                    <p>Gracias por tu compra, {form.nombre}.</p>
+                        {/* Mensaje de confirmación */}
+                        <div className="text-center mb-4">
+                            <i className="bi bi-check-circle fs-1 text-success"></i>
+                            <h2 className="mt-2">¡Compra confirmada!</h2>
+                            <p className="text-secondary mb-0">
+                                Gracias por tu compra, {form.nombre}. El detalle se enviaría a {form.email}.
+                            </p>
+                            <small className="text-secondary">Es una compra simulada: no se realizó ningún cobro.</small>
+                        </div>
+
+                        {/* Resumen del pedido */}
+                        <div className="card mb-4">
+                            <div className="card-body">
+
+                                <h5 className="card-title">Resumen de tu pedido</h5>
+
+                                <ul className="list-group list-group-flush">
+                                    {pedido.items.map(item => (
+                                        <li className="list-group-item d-flex justify-content-between px-0" key={item.id}>
+                                            <span>{item.nombre} × {item.cantidad}</span>
+                                            <span>US${(item.precio * item.cantidad).toFixed(2)}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="d-flex justify-content-between fs-5 fw-bold mt-3">
+                                    <span>Total ({pedido.cantidadTotal} {pedido.cantidadTotal === 1 ? 'producto' : 'productos'})</span>
+                                    <span className="text-primary">US${pedido.total.toFixed(2)}</span>
+                                </div>
+
+                                <p className="text-secondary mb-0 mt-3">
+                                    <i className="bi bi-truck me-2"></i>
+                                    {form.entrega === 'envio' ? `Envío a domicilio: ${form.direccion}` : 'Retiro en tienda'}
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div className="d-grid">
+                            <Link to="/productos" className="btn btn-primary btn-lg">Seguir comprando</Link>
+                        </div>
+
+                    </div>
                 </div>
-
-                <Link to="/productos" className="btn btn-primary">Volver al catálogo</Link>
             </div>
         )
     }

@@ -23,7 +23,7 @@ function ProductoCard({ producto, agregarAlCarrito }) {
                 <h5 className="card-title mt-1">{producto.nombre}</h5>
                 <p className="card-text text-secondary producto-desc">{producto.descripcion}</p>
 
-                {/* Precio del producto, precio anterior y stock */}
+                {/* Precio del producto, y precio anterior si está en oferta */}
                 <p className="mb-1">
                     <span className="fs-4 fw-bold text-primary">US${producto.precio.toFixed(2)}</span>
                     {producto.precioAnterior && (

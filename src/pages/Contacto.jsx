@@ -90,7 +90,7 @@ function Contacto() {
             <section className="page-hero">
 
                 <div className="container">
-                    <p className="text-uppercase fw-semibold small mb-2" style={{ letterSpacing: '.1em', opacity: .8 }}>Estamos para ayudarte</p>
+                    <p className="text-uppercase fw-semibold small mb-2 etiqueta">Estamos para ayudarte</p>
                     <h1 className="display-5 fw-bold">Contacto</h1>
                     <p className="lead mb-0">¿Tenés alguna consulta sobre un producto, un pedido o una devolución? Escribinos y te respondemos.</p>
                 </div>

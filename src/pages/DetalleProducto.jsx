@@ -4,13 +4,9 @@ import ProductoCard from '../components/ProductoCard'
 
 function DetalleProducto({ agregarAlCarrito }) {
 
-    // Obtener el producto según el id de la URL, si tiene filtrado por categoría, mostrar los relacionados de la misma categoría primero, sino mostrar los demás productos.
+    // Obtener el producto según el id de la URL.
     const { id } = useParams()
     const producto = productos.find(p => p.id === Number(id))
-    const relacionados = [
-        ...productos.filter(p => p.categoria === producto.categoria && p.id !== producto.id),
-        ...productos.filter(p => p.categoria !== producto.categoria)
-    ].slice(0, 4)
 
     // Si no se encuentra el producto, mostrar un mensaje de error
     if (!producto) {
@@ -24,6 +20,12 @@ function DetalleProducto({ agregarAlCarrito }) {
             </div>
         )
     }
+
+    // Si tiene filtrado por categoría, mostrar los relacionados de la misma categoría primero, sino mostrar los demás productos.
+    const relacionados = [
+        ...productos.filter(p => p.categoria === producto.categoria && p.id !== producto.id),
+        ...productos.filter(p => p.categoria !== producto.categoria)
+    ].slice(0, 4)
 
     return (
         <div className="container my-4">

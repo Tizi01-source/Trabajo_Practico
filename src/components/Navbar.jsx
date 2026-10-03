@@ -5,6 +5,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 function Navbar({ cantidadTotal, tema, alternarTema }) {
     const { pathname } = useLocation()
 
+    // Cerrar el menú de navegación en dispositivos móviles al cambiar de ruta.
     useEffect(() => {
         const menu = document.getElementById('menu')
         if (menu && menu.classList.contains('show')) {
