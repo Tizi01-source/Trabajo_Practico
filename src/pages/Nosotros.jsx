@@ -1,16 +1,16 @@
 import { productos } from '../data/productos'
 
+// Página "Nosotros" que describe la historia, misión y valores de la tienda
 function Nosotros() {
 
+    // Datos de la tienda y valores que se mostrarán en la página
     const cantidadProductos = productos.length
     const cantidadCategorias = new Set(productos.map(p => p.categoria)).size
-
     const datos = [
         { icono: 'bi-calendar-event', valor: '2026', texto: 'Año de lanzamiento' },
         { icono: 'bi-controller', valor: cantidadProductos, texto: 'Productos en catálogo' },
         { icono: 'bi-grid', valor: cantidadCategorias, texto: 'Categorías' }
     ]
-
     const valores = [
         { icono: 'bi-eye', titulo: 'Claridad', texto: 'Un catálogo fácil de recorrer y precios a la vista.' },
         { icono: 'bi-lightning-charge', titulo: 'Rapidez', texto: 'Comprar en pocos pasos, sin vueltas.' },
@@ -19,19 +19,25 @@ function Nosotros() {
 
     return (
         <>
+
             {/* Encabezado con imagen */}
             <section className="page-hero">
+
                 <div className="container">
                     <p className="text-uppercase fw-semibold small mb-2 etiqueta">Conocenos</p>
                     <h1 className="display-5 fw-bold">Sobre Future<span className="x-clara">X</span></h1>
                     <p className="lead mb-0">Una tienda de videojuegos hecha para jugadores.</p>
                 </div>
+
             </section>
 
+            {/* Sección de datos de la tienda */}
             <div className="container my-5">
 
                 {/* Historia y misión */}
                 <div className="row g-4 align-items-stretch mb-5">
+
+                    {/* Nuestra historia */}
                     <div className="col-lg-7">
                         <p className="text-uppercase fw-semibold small mb-1 texto-acento">Cómo empezó</p>
                         <h2>Nuestra historia</h2>
@@ -44,6 +50,7 @@ function Nosotros() {
                             </p>
                         </div>
                     </div>
+                    {/* Nuestra misión */}
                     <div className="col-lg-5">
                         <div className="card h-100 border-primary">
                             <div className="card-body">
@@ -54,10 +61,12 @@ function Nosotros() {
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 {/* Datos de la tienda */}
                 <div className="row g-4 text-center mb-5">
+
                     {datos.map(dato => (
                         <div className="col-md-4" key={dato.texto}>
                             <div className="card h-100">
@@ -69,6 +78,7 @@ function Nosotros() {
                             </div>
                         </div>
                     ))}
+
                 </div>
 
                 {/* Valores */}
@@ -89,15 +99,18 @@ function Nosotros() {
                 <h2 className="mb-3">Quién lo hizo</h2>
                 <div className="card">
                     <div className="card-body d-flex align-items-center gap-3 flex-wrap">
+
                         <div className="avatar-iniciales">TC</div>
+
                         <div className="flex-grow-1">
                             <h3 className="h5 mb-1">Tiziano Costantini Marquez</h3>
                             <p className="text-secondary mb-2">Estudiante de la Licenciatura en Informática, UNAHUR.</p>
                             <span className="badge text-bg-secondary me-1">React</span>
-                            <span className="badge text-bg-secondary me-1">React Router</span>
-                            <span className="badge text-bg-secondary me-1">Bootstrap</span>
+                            <span className="badge text-bg-secondary me-1">JavaScript</span>
+                            <span className="badge text-bg-secondary me-1">CSS</span>
                             <span className="badge text-bg-secondary">Vite</span>
                         </div>
+
                     </div>
                 </div>
 

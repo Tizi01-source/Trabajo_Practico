@@ -2,26 +2,29 @@ import { productos } from "../data/productos.js"
 import ProductoCard from "../components/ProductoCard.jsx"
 import { useState } from "react"
 
+// Página de catálogo de productos, con filtros y ordenamiento
 function Productos({ agregarAlCarrito }) {
 
+    // Estados para filtros y ordenamiento
     const [busqueda, setBusqueda] = useState('')
     const [categoria, setCategoria] = useState('Todas')
     const [orden, setOrden] = useState('ninguno')
+    const hayFiltros = busqueda !== '' || categoria !== 'Todas' || orden !== 'ninguno'
 
+    // Filtrado y ordenamiento de productos
     const productosFiltrados = productos.filter(producto =>
         producto.nombre.toLowerCase().includes(busqueda.toLowerCase()) &&
         (categoria === 'Todas' || producto.categoria === categoria)
     )
 
-    // sort modifica el array sobre el que se llama, por eso se trabaja sobre una copia
+    // Ordenamiento de productos según el estado "orden"
     const productosOrdenados = [...productosFiltrados].sort((a, b) => {
         if (orden === 'menor') return a.precio - b.precio
         if (orden === 'mayor') return b.precio - a.precio
         return 0
     })
 
-    const hayFiltros = busqueda !== '' || categoria !== 'Todas' || orden !== 'ninguno'
-
+    // Función para limpiar filtros y ordenamiento
     function limpiarFiltros() {
         setBusqueda('')
         setCategoria('Todas')
@@ -33,7 +36,10 @@ function Productos({ agregarAlCarrito }) {
 
             <h2 className="mb-3">Productos</h2>
 
+            {/* Filtros y ordenamiento */}
             <div className="row g-3 mb-3">
+
+                {/* Filtro por nombre */}
                 <div className="col-12 col-md-6">
                     <input
                         type="text"
@@ -44,6 +50,7 @@ function Productos({ agregarAlCarrito }) {
                         onChange={(e) => setBusqueda(e.target.value)}
                     />
                 </div>
+                {/* Filtro por categoría */}
                 <div className="col-6 col-md-3">
                     <select
                         className="form-select"
@@ -58,6 +65,7 @@ function Productos({ agregarAlCarrito }) {
                         <option value="Accesorio">Accesorio</option>
                     </select>
                 </div>
+                {/* Ordenamiento */}
                 <div className="col-6 col-md-3">
                     <select
                         className="form-select"
@@ -70,17 +78,25 @@ function Productos({ agregarAlCarrito }) {
                         <option value="mayor">Precio: mayor a menor</option>
                     </select>
                 </div>
+
             </div>
 
+            {/* Contador de productos y botón para limpiar filtros */}
             <div className="d-flex justify-content-between align-items-center mb-3">
+
+                {/* Contador de productos */}
                 <small className="text-secondary">
                     {productosOrdenados.length} {productosOrdenados.length === 1 ? 'producto' : 'productos'}
                 </small>
+
+                {/* Botón para limpiar filtros */}
                 {hayFiltros && (
                     <button className="btn btn-link btn-sm p-0" onClick={limpiarFiltros}>Limpiar filtros</button>
                 )}
+
             </div>
 
+            {/* Mensaje cuando no hay productos */}
             {productosOrdenados.length === 0 && (
                 <div className="text-center my-5">
                     <i className="bi bi-search fs-1 text-secondary"></i>
@@ -89,6 +105,7 @@ function Productos({ agregarAlCarrito }) {
                 </div>
             )}
 
+            {/* Lista de productos */}
             <div className="row g-4">
                 {productosOrdenados.map(producto => (
                     <div className="col-12 col-sm-6 col-lg-3" key={producto.id}>

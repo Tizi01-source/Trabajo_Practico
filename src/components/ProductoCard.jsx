@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom"
 
+// Componente que representa una tarjeta de producto, mostrando información relevante y permitiendo agregar al carrito o ver detalles del producto.
 function ProductoCard({ producto, agregarAlCarrito }) {
+
     return (
         <div className="card h-100 producto-card">
 
+            {/* Imagen del producto y etiqueta */}
             <div className="position-relative">
                 {producto.etiqueta && (
                     <span className={`badge position-absolute top-0 start-0 m-2 ${producto.etiqueta === 'Oferta' ? 'text-bg-danger' : 'text-bg-primary'}`}>
@@ -13,11 +16,14 @@ function ProductoCard({ producto, agregarAlCarrito }) {
                 <img src={producto.imagen} className="card-img-top producto-img" alt={producto.nombre} />
             </div>
 
+            {/* Contenido de la tarjeta */}
             <div className="card-body d-flex flex-column">
+                {/* Categoría, nombre y descripción del producto */}
                 <small className="text-uppercase text-secondary fw-semibold">{producto.categoria}</small>
                 <h5 className="card-title mt-1">{producto.nombre}</h5>
                 <p className="card-text text-secondary producto-desc">{producto.descripcion}</p>
 
+                {/* Precio del producto, precio anterior y stock */}
                 <p className="mb-1">
                     <span className="fs-4 fw-bold text-primary">US${producto.precio.toFixed(2)}</span>
                     {producto.precioAnterior && (
@@ -27,7 +33,7 @@ function ProductoCard({ producto, agregarAlCarrito }) {
                     )}
                 </p>
 
-                {/* Estado del stock */}
+                {/* Estado del stock, si está disponible o no */}
                 <p className="mb-3">
                     {producto.stock === 0
                         ? <span className="badge text-bg-danger">Sin stock</span>
@@ -36,6 +42,7 @@ function ProductoCard({ producto, agregarAlCarrito }) {
                             : <small className="text-secondary">{producto.stock} disponibles</small>}
                 </p>
 
+                {/* Botones de acción */}
                 <div className="mt-auto d-grid gap-2">
                     <button onClick={() => agregarAlCarrito(producto)} className="btn btn-primary" disabled={producto.stock === 0}>
                         {producto.stock === 0 ? "No disponible" : "Agregar al carrito"}

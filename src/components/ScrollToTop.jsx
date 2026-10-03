@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+// Efecto para hacer scroll al top de la página cuando cambia la ruta
 function ScrollToTop() {
     const { pathname } = useLocation()
 

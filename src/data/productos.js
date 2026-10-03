@@ -1,15 +1,15 @@
 export const productos = [
     {
-        id: 1,
-        nombre: "Call Of Duty Vanguard",
-        categoria: "Juego",
-        precio: 39.90,
-        imagen: "/img/juego1.jpg",
-        descripcion: "Juego de disparos en primera persona ambientado en la Segunda Guerra Mundial.",
-        descripcionCompleta: "Call of Duty es un juego de disparos en primera persona ambientado en la Segunda Guerra Mundial. Los jugadores asumen el papel de soldados en diferentes campañas y escenarios históricos, participando en intensas batallas y misiones. El juego ofrece una experiencia inmersiva con gráficos realistas, sonido envolvente y una narrativa emocionante que captura la esencia de la guerra.",
-        stock: 15,
-        destacado: true,
-        caracteristicas: ["Disparos", "FPS", "Multijugador"]
+        id: 1, // Id para identificar el producto. Tipo number.
+        nombre: "Call Of Duty Vanguard", // Nombre del producto. Tipo string.
+        categoria: "Juego", // Categoría del producto. Tipo string.
+        precio: 39.90, // Precio del producto. Tipo number.
+        imagen: "/img/juego1.jpg", // Ruta de la imagen del producto. Tipo string.
+        descripcion: "Juego de disparos en primera persona ambientado en la Segunda Guerra Mundial.", // Descripción breve del producto. Tipo string.
+        descripcionCompleta: "Call of Duty es un juego de disparos en primera persona ambientado en la Segunda Guerra Mundial. Los jugadores asumen el papel de soldados en diferentes campañas y escenarios históricos, participando en intensas batallas y misiones. El juego ofrece una experiencia inmersiva con gráficos realistas, sonido envolvente y una narrativa emocionante que captura la esencia de la guerra.", // Descripción completa del producto. Tipo string.
+        stock: 15, // Cantidad de unidades disponibles en stock. Tipo number.
+        destacado: true, // Indica si el producto es destacado. Tipo boolean.
+        caracteristicas: ["Disparos", "FPS", "Multijugador"] // Lista de características del producto. Tipo array de strings.
     }, // Juego 1
     {
         id: 2,
@@ -32,6 +32,7 @@ export const productos = [
         descripcion: "Control inalámbrico para la consola PlayStation 4 con tecnología de vibración y sensor de movimiento.",
         descripcionCompleta: "El DualShock 4 es un control inalámbrico diseñado para la consola PlayStation 4. Cuenta con tecnología de vibración, un sensor de movimiento y un panel táctil que permite una experiencia de juego más inmersiva. Su diseño ergonómico proporciona comodidad durante largas sesiones de juego.",
         stock: 0,
+        destacado: false,
         caracteristicas: ["Negro", "Inalámbrico"]
     }, // Periférico 1
     {
@@ -43,6 +44,7 @@ export const productos = [
         descripcion: "Cargador para dispositivos electrónicos.",
         descripcionCompleta: "Cargador para dispositivos electrónicos. Compatible con una amplia gama de dispositivos y ofrece una carga rápida y eficiente.",
         stock: 5,
+        destacado: false,
         caracteristicas: ["Eficiente", "Rápido"]
     }, // Accesorio 1
     {
@@ -54,6 +56,7 @@ export const productos = [
         descripcion: "Audífonos inalámbricos con cancelación de ruido.",
         descripcionCompleta: "Los audífonos inalámbricos con cancelación de ruido ofrecen una experiencia de audio superior, permitiendo disfrutar de la música y las llamadas sin interrupciones. Su diseño ergonómico y comodidad durante largas sesiones de uso los convierten en una opción ideal para el día a día.",
         stock: 10,
+        destacado: false,
         caracteristicas: ["Inalámbricos", "Cancelación de ruido"]
     }, // Periférico 2
     {
@@ -67,6 +70,7 @@ export const productos = [
         descripcion: "Teclado mecánico con retroiluminación RGB.",
         descripcionCompleta: "El teclado mecánico con retroiluminación RGB ofrece una experiencia de escritura y juego excepcional. Sus teclas mecánicas proporcionan una respuesta táctil precisa, mientras que la iluminación RGB personalizable permite crear un ambiente de juego único.",
         stock: 12,
+        destacado: false,
         caracteristicas: ["Mecánico", "RGB"]
     }, // Periférico 3
     {
@@ -91,6 +95,7 @@ export const productos = [
         descripcion: "Consola de videojuegos de última generación con gráficos de alta calidad y rendimiento excepcional.",
         descripcionCompleta: "La PlayStation 5 Pro es una consola de videojuegos de última generación que ofrece gráficos de alta calidad y un rendimiento excepcional. Con su potente hardware, permite disfrutar de juegos con tiempos de carga reducidos y una experiencia de juego fluida.",
         stock: 0,
+        destacado: false,
         caracteristicas: ["Sony", "Pro"]
     }, // Consola 3
     {
@@ -102,6 +107,7 @@ export const productos = [
         descripcion: "Soporte para consola que permite mantenerla en posición vertical y mejorar la ventilación.",
         descripcionCompleta: "El soporte para consola es una solución ideal para mantener la consola en posición vertical, lo que mejora la ventilación y evita el sobrecalentamiento. Es fácil de instalar y se adapta a diferentes tipos de consolas.",
         stock: 7,
+        destacado: false,
         caracteristicas: ["Ergonómico", "Ventilación"]
     }, // Accesorio 2
     {
@@ -113,6 +119,7 @@ export const productos = [
         descripcion: "Cargador portátil para dispositivos electrónicos, ideal para viajes y uso diario.",
         descripcionCompleta: "El cargador portátil es una solución práctica para cargar dispositivos electrónicos en movimiento. Con su diseño compacto y eficiente, es perfecto para viajes y uso diario, garantizando que tus dispositivos siempre estén cargados.",
         stock: 4,
+        destacado: false,
         caracteristicas: ["Compacto", "Eficiente"]
     }, // Accesorio 3
     {
@@ -125,6 +132,7 @@ export const productos = [
         descripcion: "Juego de fútbol con gráficos realistas y modos de juego variados.",
         descripcionCompleta: "EA Sports 25 es un juego de fútbol que ofrece gráficos realistas y una jugabilidad mejorada. Los jugadores pueden disfrutar de diferentes modos de juego, incluyendo partidos rápidos, torneos y modos en línea, brindando una experiencia completa para los fanáticos del fútbol.",
         stock: 20,
+        destacado: false,
         caracteristicas: ["Fútbol", "Física", "Multijugador"]
     }, // Juego 2
     {
