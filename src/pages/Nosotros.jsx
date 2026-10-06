@@ -6,8 +6,9 @@ function Nosotros() {
     // Datos de la tienda y valores que se mostrarán en la página
     const cantidadProductos = productos.length
     const cantidadCategorias = new Set(productos.map(p => p.categoria)).size
+    const anioLanzamiento = new Date().getFullYear()
     const datos = [
-        { icono: 'bi-calendar-event', valor: '2026', texto: 'Año de lanzamiento' },
+        { icono: 'bi-calendar-event', valor: anioLanzamiento, texto: 'Año de lanzamiento' },
         { icono: 'bi-controller', valor: cantidadProductos, texto: 'Productos en catálogo' },
         { icono: 'bi-grid', valor: cantidadCategorias, texto: 'Categorías' }
     ]
